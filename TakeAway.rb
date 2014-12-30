@@ -13,8 +13,7 @@ class Order
   end
 
   def ordered
-    @quantity ||= []
-    @items ||= []
+    @items ||= [] 
    end
 
   def item_count
@@ -22,11 +21,13 @@ class Order
   end
 
   def add_item(items, amount)
-    ordered << amount
     ordered << items
-    
+    quantity << amount
   end
 
+  def quantity
+     @quantity ||= []
+  end
 
   def delivery_time
       puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min).to_i : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
@@ -34,8 +35,7 @@ class Order
 
   def end_statement
      puts "#{self.delivery_time}You have ordered #{self.item_count} categories of food:"  
-
-     self.ordered.each {|quantity, item| puts "#{quantity} #{item}"}
+     self.quantity.each {|quantity, item| puts "#{quantity}: #{@items.shift}"} 
      
   end
     
