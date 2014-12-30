@@ -1,4 +1,3 @@
-
 @items = []
 
 class Order
@@ -31,7 +30,7 @@ end
 order = Order.new
   puts "Hello, and welcome to TakeAway! Here is the menu:"
   $dishes.each {|key, value| puts "#{key}: $#{value}"}
-    puts "Please pick an item or items from the menu by typing the menu item"
+    puts "Please pick an item from the menu by typing the menu item"
     items = gets.chomp.capitalize
     begin
       if $dishes.has_key?(items)
@@ -45,5 +44,4 @@ order = Order.new
     end until items.capitalize == "Finished"
      puts "Thank you for ordering! You now have ordered #{@items.count} items:"  
       @items.each {|item| puts "#{item} "}
-
 
