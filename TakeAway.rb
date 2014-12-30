@@ -9,6 +9,9 @@ class Order
    
   end
   
+  def delivery_time
+      puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+  end
 
   def ordered
     @items = []
@@ -42,6 +45,6 @@ order = Order.new
         items = gets.chomp.capitalize
       end
     end until items.capitalize == "Finished"
-     puts "Thank you for ordering! You now have ordered #{@items.count} items:"  
+     puts "#{order.delivery_time} You now have ordered #{@items.count} items:"  
       @items.each {|item| puts "#{item} "}
 
