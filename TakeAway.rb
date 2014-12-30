@@ -4,6 +4,7 @@ class Order
   
  $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
  @@quantity = 0
+
   
   def delivery_time
       puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min).to_i : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
@@ -40,10 +41,13 @@ order = Order.new
     items = gets.chomp.capitalize
     begin
       if $dishes.has_key?(items)
-        puts "Order for #{items} has been placed. Would you like to order anything else?"
+        puts "How many of those would you like?"
+        quantity = gets.chomp
+        puts "Order for #{quantity} #{items} has been placed. Would you like to order anything else?"
         order.add_item(items)
 
         items = gets.chomp.capitalize
+
       else 
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
         items = gets.chomp.capitalize
