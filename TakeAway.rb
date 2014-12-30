@@ -1,8 +1,14 @@
+ DEFAULT_COUNT = 0
+
 class Order
   
  $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
  @@quantity = 0
 
+
+
+
+  
   
   def delivery_time
       puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min).to_i : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
@@ -13,15 +19,11 @@ class Order
    end
 
   def item_count
-    @items.count
+     @items.nil? ? 0 : @items.count
   end
 
   def add_item(items)
     ordered << items
-  end
-
-  def error
-    puts "There is something wrong with your order"
   end
 
   def quantity(items)
@@ -61,6 +63,5 @@ order = Order.new
         items = gets.chomp.capitalize
       end
     end until items.capitalize == "Finished"
-
     order.end_statement
     
