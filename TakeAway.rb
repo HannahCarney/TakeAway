@@ -43,7 +43,6 @@ order = Order.new
         quantity = gets.to_i
         begin
         if quantity.is_a?(Integer) && quantity > 0
-          puts "Order for #{quantity} #{items} has been placed. Would you like to order anything else?"
         else
           puts "Please enter a digit that is a valid quantity for #{items}"
           quantity = gets.to_i
