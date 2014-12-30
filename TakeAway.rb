@@ -1,11 +1,11 @@
 $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
 
-
+@items = []
 
 class Order
 
-  def initialize(*items)
-    items = []
+  def initialize
+
   end
   
   def order_now
@@ -32,13 +32,16 @@ end
     begin
       if $dishes.has_key?(items)
         puts "Order for #{items} has been placed. Would you like to order anything else?"
+        @items << items
         items = gets.chomp
       else 
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
         items = gets.chomp
       end
     end until items.capitalize == "Finished"
-  
 
+
+  
+puts @items.inspect
 
 
