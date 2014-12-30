@@ -1,5 +1,3 @@
-
-
 class Order
   
  $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
@@ -42,8 +40,18 @@ order = Order.new
     begin
       if $dishes.has_key?(items)
         puts "How many of those would you like?"
-        quantity = gets.chomp
+        quantity = gets.to_i
+        begin
+        if quantity.is_a?(Integer) && quantity > 0
+          puts "Order for #{quantity} #{items} has been placed. Would you like to order anything else?"
+        else
+          puts "Please enter a digit that is a valid quantity for #{items}"
+          quantity = gets.to_i
+        end
+      end until quantity.is_a?(Integer) && quantity > 0
         puts "Order for #{quantity} #{items} has been placed. Would you like to order anything else?"
+      
+      
         order.add_item(items)
 
         items = gets.chomp.capitalize
@@ -52,8 +60,10 @@ order = Order.new
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
         items = gets.chomp.capitalize
       end
+
+    
     end until items.capitalize == "Finished"
      puts "#{order.delivery_time}You have ordered #{order.item_count} items:"  
-      order.ordered.each {|item| puts "#{item} "}
+      order.ordered.each {|item| puts "#{item} "} #need to make a default for item count
     
 
