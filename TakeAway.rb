@@ -27,9 +27,14 @@ class Order
   def quantity(items)
     if $dishes.keys.include?(items)
       @@quantity += 1
-      
     end
-  end 
+  end
+
+  def end_statement
+     puts "#{self.delivery_time}You have ordered #{self.item_count} items:"  
+     self.ordered.each {|item| puts "#{item} "}
+  end
+    
 end
 
 order = Order.new
@@ -49,20 +54,13 @@ order = Order.new
         end
       end until quantity.is_a?(Integer) && quantity > 0
         puts "Order for #{quantity} #{items} has been placed. Would you like to order anything else?"
-      
-      
         order.add_item(items)
-
         items = gets.chomp.capitalize
-
       else 
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
         items = gets.chomp.capitalize
       end
-
-    
     end until items.capitalize == "Finished"
-     puts "#{order.delivery_time}You have ordered #{order.item_count} items:"  
-      order.ordered.each {|item| puts "#{item} "} #need to make a default for item count
-    
 
+    order.end_statement
+    
