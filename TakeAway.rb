@@ -10,6 +10,10 @@ class Order
     puts "Please pick an item from the menu by typing the menu item"
   end
 
+  def order_statement
+
+  end
+
   def ordered
     @items ||= [] 
    end
@@ -17,6 +21,7 @@ class Order
   def item_count
      @items.nil? ? 0 : @items.count
   end
+
 
   def add_item(items, amount)
     ordered << items
@@ -28,13 +33,16 @@ class Order
   end
 
   def delivery_time
-      puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min).to_i : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+      puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min) : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
   end
 
   def end_statement
      puts "#{self.delivery_time}You have ordered #{self.item_count} categories of food:"  
      self.quantity.each {|quantity, item| puts "#{quantity}: #{@items.shift}"} #have to make sure a new imput of the same food goes to the same array
-     
+  end
+
+  def total_cost
+    puts "Total cost is #{self.quantity.each {|quantity| (quantity.to_i)*(@items.count.to_i)}}"
   end
     
 end
@@ -73,4 +81,4 @@ order = Order.new
       end
     end until items.capitalize == "Finished"
     order.end_statement
-    
+  
