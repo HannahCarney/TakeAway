@@ -48,6 +48,5 @@ order = Order.new
 
 
     message = @client.account.messages.create(:body => "Thank you for ordering! Your food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min) : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT).",
-      :to => $number ,     # Replace with your phone number
-    :from => "+441761502042")   # Replace with your Twilio number
-puts message.sid
+      :to => $number ,     # Can I get it to call a method?
+    :from => "+441761502042")   
