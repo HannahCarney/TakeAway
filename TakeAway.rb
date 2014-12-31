@@ -3,7 +3,7 @@
 class Order
   
  $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
- @@quantity = 0
+
 
 
   def start_statement
@@ -35,7 +35,7 @@ class Order
 
   def end_statement
      puts "#{self.delivery_time}You have ordered #{self.item_count} categories of food:"  
-     self.quantity.each {|quantity, item| puts "#{quantity}: #{@items.shift}"} 
+     self.quantity.each {|quantity, item| puts "#{quantity}: #{@items.shift}"} #have to make sure a new imput of the same food goes to the same array
      
   end
     
@@ -45,7 +45,7 @@ order = Order.new
    order.start_statement
    items = gets.chomp.capitalize
     begin
-      if $dishes.has_key?(items)
+      if $dishes.has_key?(items.capitalize)
         puts "How many of those would you like?"
         amount = gets.to_i
         begin
@@ -55,8 +55,18 @@ order = Order.new
           amount = gets.to_i
         end
       end until amount.is_a?(Integer) && amount > 0
-        puts "Order for #{amount} #{items} has been placed. Would you like to order anything else?"
-        order.add_item(items, amount)
+        puts "Please confirm your order by typing in the total cost of the items"
+        number = gets.to_i
+        begin
+          if number.to_i == amount*$dishes[items].to_i
+            order.add_item(items, amount)
+            puts "Order for #{amount} #{items} has been placed. Would you like to order anything else? Enter 'Finished' if done."
+          
+          else
+            puts "You haven't entered the correct cost. The cost is #{amount*$dishes[items]}"
+            number = gets.to_i
+          end
+        end until number.to_i == amount*$dishes[items].to_i
         items = gets.chomp.capitalize
       else 
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
