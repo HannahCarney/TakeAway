@@ -1,3 +1,15 @@
+require 'rubygems'
+require 'twilio-ruby'
+require_relative 'secret_phone_files'
+# Get your Account Sid and Auth Token from twilio.com/user/account
+account_sid =  'ACef515c8867ccc758530aefeecc8a73ef'
+auth_token = 'aaebb47b0123f8b8c80d39e958708f2f'
+@client = Twilio::REST::Client.new account_sid, auth_token
+ 
+
+  
+
+
 class Order
   
  $dishes = {"Soup" => 4, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
@@ -33,17 +45,15 @@ class Order
   end
 
   def delivery_time
-      puts "Thank you for ordering! Your Food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min) : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+      puts "Thank you for ordering! Your food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min) : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
   end
 
   def end_statement
      puts "#{self.delivery_time}You have ordered #{self.item_count} categories of food:"  
      self.quantity.each {|quantity, item| puts "#{quantity}: #{@items.shift}"} #have to make sure a new imput of the same food goes to the same array
+  
   end
 
-  def total_cost
-    puts "Total cost is #{self.quantity.each {|quantity| (quantity.to_i)*(@items.count.to_i)}}"
-  end
     
 end
 
@@ -80,5 +90,12 @@ order = Order.new
         items = gets.chomp.capitalize
       end
     end until items.capitalize == "Finished"
-    order.end_statement
-  
+    order.end_statement 
+    
+    message = @client.account.messages.create(:body => "Thank you for ordering! Your food will be delivered before #{Time.new.hour + 1 > 12 ? (Time.new.hour + 1) - 12 : Time.new.hour + 1}:#{Time.new.min < 10 ? (sprintf '%02d', Time.new.min) : Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT).",
+      :to => $number ,     # Replace with your phone number
+    :from => "+441761502042")   # Replace with your Twilio number
+puts message.sid
+
+ 
+   
