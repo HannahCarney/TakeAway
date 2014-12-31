@@ -1,8 +1,6 @@
- DEFAULT_COUNT = 0
-
 class Order
   
- $dishes = {"Soup" => 4.5, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
+ $dishes = {"Soup" => 4, "Rice" => 2, "Pizza" => 8, "Curry" => 8, "Salad" => 5, "Chicken" => 4, "Beef" => 6}
 
 
 
@@ -56,17 +54,18 @@ order = Order.new
         end
       end until amount.is_a?(Integer) && amount > 0
         puts "Please confirm your order by typing in the total cost of the items"
-        number = gets.to_i
+       
         begin
-          if number.to_i == amount*$dishes[items].to_i
+           number = gets.to_i
+          if number == amount*$dishes[items].to_i
             order.add_item(items, amount)
             puts "Order for #{amount} #{items} has been placed. Would you like to order anything else? Enter 'Finished' if done."
           
           else
             puts "You haven't entered the correct cost. The cost is #{amount*$dishes[items]}"
-            number = gets.to_i
+            
           end
-        end until number.to_i == amount*$dishes[items].to_i
+        end until number == amount*$dishes[items].to_i
         items = gets.chomp.capitalize
       else 
         puts "Sorry! Not a correct item from the menu. Enter one, or enter 'Finished' if you are done"
