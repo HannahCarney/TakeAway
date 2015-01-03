@@ -34,7 +34,7 @@ order = Order.new
             puts "Order for #{amount} #{items} has been placed. Would you like to order anything else? Enter 'Finished' if done."
           
           else
-            puts "You haven't entered the correct cost. The cost is #{amount*$dishes[items]}"
+            puts "You haven't entered the correct cost. The cost is #{order.cost(items, amount)}"
             
           end
         end until number == order.cost(items, amount)
