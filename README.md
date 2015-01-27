@@ -1,9 +1,14 @@
 TakeAway
 ========
-
 Makers Academy (Christmas Challenge)
 
-==================
+Screen Shot of final Text
+============
+
+<div align="center">
+        <img width="45%" src="proof.jpg">
+</div>
+<p></p>
 
 Instructions
 -------
