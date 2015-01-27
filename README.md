@@ -6,7 +6,7 @@ Screen Shot of final Text
 ============
 
 <div align="center">
-        <img width="45%" src="proof.jpg">
+        <img width="45%" src="Proof.jpeg">
 </div>
 <p></p>
 
