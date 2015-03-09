@@ -7,10 +7,6 @@ account_sid =  'ACef515c8867ccc758530aefeecc8a73ef'
 auth_token = 'aaebb47b0123f8b8c80d39e958708f2f'
 @client = Twilio::REST::Client.new account_sid, auth_token
  
-
-
-
-
 order = Order.new
    order.start_statement
    items = gets.chomp.capitalize
