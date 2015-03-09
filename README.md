@@ -12,18 +12,6 @@ Screen Shot of final Text
 </div>
 <p></p>
 
-
-:bowling: Bowling Score Card :bowling:
-==========
-Week 5 JavaScript Challenge
--------------------------
-Screenshot
----
-<div align="center">
-        <img width="45%" src="public/images/background.png">
-</div>
-
-
 Objectives of exercise
 ----
 
